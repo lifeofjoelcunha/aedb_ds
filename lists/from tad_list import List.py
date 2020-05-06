@@ -1,86 +1,157 @@
-from tad_list import List 
+from tad_list import List
+
+
+class Node:(data):
+    def __init__(data):
+        self.data = data
+        self.next = None
 
 class SinglyLinkedList(List):
-    def __init__ (self):
-        self.head = None 
-        self.tall = None
-
-      # Returns true iff the list contains no elements.
-
+    def __init__(self):
+        self.head = None
+        self.tail = None
+# Returns true iff the list contains no elements.
+   
     def is_empty(self): 
         return self.head == None
 
     # Returns the number of elements in the list.
    
-    def size(self): 
-        corrent = self.head
+    def size(self):
+        nodes = self.head
         count = 0
-        while current:
+        while nodes:
             count += 1
-            current = current.get.next()
-            return count
+            node = node.next
+        return count
 
     # Returns the first element of the list.
     # Throws EmptyListException.
     
     def get_first(self):
-        if self.head == none:
-            raise exception("Não existem elementos na lista.")
-        return self.head
+        return self.head.data
 
     # Returns the last element of the list.
     # Throws EmptyListException.
-       def get_last(self):
-        return self.tail
+    
+    def get_last(self):
+        return self.tail.data
 
     # Returns the element at the specified position in the list.
     # Range of valid positions: 0, ..., size()-1.
-    @abstractmethod
-    def get(self, position): pass
+    
+    def get(self, position):
+        count = 0
+        node = self.head
+        while node:
+            if count == position:
+                return node.data
+                node = node.next
+                count += 1 
+            raise InvalidPositionException()
 
     # Returns the position in the list of the
     # first occurrence of the specified element,
     # or -1 if the specified element does not
     # occur in the list.
-    @abstractmethod
-    def find(self, element): pass
+    
+    def find(self, element):
+        count = 0
+        node = self.head
+        while node:
+            if node.data == element:
+                return count
+            node = node.next
+            count += 1
+        return -1
 
     # Inserts the specified element at the first position in the list.
-    @abstractmethod
-    def insert_first(self, element): pass
+    
+    def insert_first(self, element):
+        node = Node(element)
+        node.next = self.head
+        self.head = node
+        if not self.tail:
+            self.tail = self.head
 
     # Inserts the specified element at the last position in the list.
-    @abstractmethod
-    def insert_last(self, element): pass
+    
+    def insert_last(self, element):
+        node = Node(element)
+        self.tail.next = node
+        if not self.head:
+            self.head = self.tail
+        self.tail = node
 
     # Inserts the specified element at the specified position in the list.
     # Range of valid positions: 0, ..., size().
     # If the specified position is 0, insert corresponds to insertFirst.
     # If the specified position is size(), insert corresponds to insertLast.
     # Throws InvalidPositionException.
-    @abstractmethod
-    def insert(self, element, position): pass
+    
+    def insert(self, element, position):
+        if position == 0:
+            self.insert_first(element)
+        elif position == self.size() - 1:
+            self.insert_last(element)
+        else:
+            count = 0
+            node = self.head
+            while node:
+                if count == position:
+                    _node = Node(element)
+                    _node.next = node.next
+                    node.next = _node
+                return raise InvalidPositionException()
 
     # Removes and returns the element at the first position in the list.
     # Throws EmptyListException.
-    @abstractmethod
-    def remove_first(self): pass
+    
+    def remove_first(self):
+        if self.is_empty():
+            raise EmptyListException()
+            node = self.head
+            self.head = node.next
+        return node.data
 
     # Removes and returns the element at the last position in the list.
     # Throws EmptyListException.
-    @abstractmethod
-    def remove_last(self): pass
+    
+    def remove_last(self):
+        if self.is_empty():
+            raise EmptyListException()
+            node = self.tail
+             _node = self.head
+        while _node:
+            if _node.next == node
+                _node.next = None
+                self.tail = _node
+                 _node = _node.next
+        return node.data
     
     # Removes and returns the element at the specified position in the list.
     # Range of valid positions: 0, ..., size()-1.
     # Throws InvalidPositionException.
-    @abstractmethod
-    def remove(self, position): pass
+    
+    def remove(self, position):
+        count = 0
+        node = self.head
+        while node:
+            if count == position:
+                return node.data
+            node = node.next
+            count += 1
+        raise InvalidPositionException()
     
     # Removes all elements from the list.
-    @abstractmethod
-    def make_empty(self): pass
+    
+    def make_empty(self): 
+        del self.head
 
     # Returns an iterator of the elements in the list (in proper sequence).
-    @abstractmethod
-    def iterator(self): pass
+   
+    def iterator(self):
+        node = self.head
+        while node:
+            yield node.data
+            node = node.next
