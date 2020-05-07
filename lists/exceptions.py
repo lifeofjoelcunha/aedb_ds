@@ -1,5 +1,5 @@
 class EmptyListException(Exception):
-    pass
+    print("Lista vazia")
 
 class InvalidPositionException(Exception):
     pass
