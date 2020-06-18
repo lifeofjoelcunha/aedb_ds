@@ -3,7 +3,8 @@ import unittest
 from aed_ds.exceptions import EmptyListException, InvalidPositionException
 from aed_ds.lists.singly_linked_list import SinglyLinkedList
 from aed_ds.lists.singly_linked_list_iterator import SinglyLinkedListIterator
-from aed_ds.lists.tad_iterator import Iterator
+from aed_ds.tad_iterator import Iterator
+
 
 class TestSinglyLinkedList(unittest.TestCase):
     def setUp(self):
@@ -79,8 +80,8 @@ class TestSinglyLinkedList(unittest.TestCase):
         self.add_elements(4, shift=1)
         self.list.insert("element X", 2)
         self.assertEqual(self.list.get(2), "element X")
-        self.list.insert("last element", self.list.size()-1)
-        self.assertEqual(self.list.get_last(), "las_element")
+        self.list.insert("last element", self.list.size())
+        self.assertEqual(self.list.get_last(), "last element")
         with self.assertRaises(InvalidPositionException):
             self.list.insert("element bean", 42)
 
@@ -92,7 +93,6 @@ class TestSinglyLinkedList(unittest.TestCase):
         self.assertEqual(self.list.get_first(), "element 2")
     
     def test_remove_first_single_element(self):
-        self.list.make_empty()
         self.add_elements(1)
         self.assertEqual(self.list.remove_first(), "element 1")
 
@@ -123,6 +123,10 @@ class TestSinglyLinkedList(unittest.TestCase):
         self.add_elements(5)
         self.list.remove_last()
         self.assertEqual(self.list.get_last(), "element 4")
+    
+    def test_remove_last_two_elements(self):
+        self.add_elements(2)
+        self.assertEqual(self.list.remove_last(), "element 2")
 
     def test_remove_last_single_element(self):
         self.list.make_empty()
@@ -196,3 +200,6 @@ class TestSinglyLinkedList(unittest.TestCase):
     def test_iterator(self):
         self.assertIsInstance(self.list.iterator(), Iterator)
         self.assertIsInstance(self.list.iterator(), SinglyLinkedListIterator)
+
+if __name__ == "__main__":
+    unittest.main()
